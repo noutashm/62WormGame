@@ -3,3 +3,20 @@
     margin: 0;
     box-sizing: inherit;
 }
+
+/* Navbar */
+
+.nav-item {
+    transition: 0.3s;
+    padding: 0 1vw;
+    font-weight: bold;
+  }
+
+.nav-link {
+    color: #E8BE98;
+}
+  
+  .nav-item:hover {
+    background-color: rgb(119, 119, 119);
+    color: white;
+  }
