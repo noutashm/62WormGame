@@ -18,7 +18,7 @@
   transition: 0.5s;
 }
 
-.nav-link {
+.nav-link, .nav-link:visited, .nav-link:active {
   color: #E8BE98;
 }
   
