@@ -23,9 +23,9 @@
 }
   
 .nav-item:hover {
-  background-color: rgb(119, 119, 119);
+  background-color: #E8BE98;
 }
 
-.nav-link:hover {
+.nav-link:hover, .nav-item:hover {
   color: #270F0D;
 }
