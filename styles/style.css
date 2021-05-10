@@ -26,6 +26,16 @@
   background-color: #E8BE98;
 }
 
-.nav-link:hover, .nav-item:hover {
+.nav-item:hover .nav-link {
   color: #270F0D;
+}
+
+.middle-content {
+  display: inline-block;
+  margin-left: 8vh;
+}
+
+.middle-content img {
+  width: 60%;
+  margin-left: 20%;
 }
