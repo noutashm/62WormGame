@@ -1,10 +1,11 @@
+/*=============== Global =================*/
 * {
   padding: 0;
   margin: 0;
   box-sizing: inherit;
 }
 
-/* Navbar */
+/*=============== Nav =================*/
 .navbar {
   padding: 0;
 }
@@ -30,12 +31,16 @@
   color: #270F0D;
 }
 
-.middle-content {
-  display: inline-block;
-  margin-left: 8vh;
+/*=============== Content =================*/
+
+.row, .left-img, .right-img {
+  width: 100%;
 }
 
-.middle-content img {
-  width: 60%;
-  margin-left: 20%;
+.right-img {
+  float: right;
+}
+
+.content {
+  text-align: center;
 }
