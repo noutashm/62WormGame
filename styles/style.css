@@ -32,10 +32,13 @@
 }
 
 /*=============== Content =================*/
-
-.row, .left-img, .right-img {
+.row {
   width: 100%;
 }
+
+/* .left-img, .right-img {
+
+} */
 
 .right-img {
   float: right;
