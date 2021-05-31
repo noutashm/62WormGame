@@ -1,6 +1,8 @@
 var score = 0
 var playerPic = new Image()
-playerPic.src = "../images/player-test.png"
+playerPic.src = "../images/player.png"
+//playerPic.addEventListener("load", loadImage, false);
+
 //Canvas
 const c = document.getElementById("canvas")
 const ctx = c.getContext("2d")
@@ -11,33 +13,57 @@ c.height = window.innerHeight
 
 //======================CLASSES===========================//
 
-//Player Class
-class Player {
-    constructor(img, x, y) {
-        this.img = img
+class GameObject {
+    constructor(x, y, width, height) {
         this.x = x
         this.y = y
+        this.width = width
+        this.height = height
     }
 
     draw() {
         ctx.beginPath()
-        //ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false)
+        ctx.arc(this.x, this.y, this.radius, Math.PI, 0, false)
+
+        ctx.fill()
+    }
+
+    update() {
+
+    }
+}
+
+//Player Class
+class Player extends GameObject {
+    constructor() {
+    }
+
+    draw(position, x, y) {
+        let pos = this.positions[position]
         ctx.drawImage(this.img, this.x, this.y)
         //ctx.fillStyle = this.color
         ctx.fill()
     }
 
-    movePlayer() {
-        $('body').bind('keyup', function (event) {
-            switch (event.which) {
-                case 87:
-                case 83: player.ydir = 0; break;
-                case 65:
-                case 68: player.xdir = 0; break;
-            }
-            event.preventDefault();
-            return false;
-        });
+    // movePlayer() {
+    //     $('body').bind('keyup', function (event) {
+    //         switch (event.which) {
+    //             case 87:
+    //             case 83: player.ydir = 0; break;
+    //             case 65:
+    //             case 68: player.xdir = 0; break;
+    //         }
+    //         event.preventDefault();
+    //         return false;
+    //     });
+    // }
+}
+
+//Worms Class
+class Worm extends GameObject {
+    constructor(radius, color) {
+        this.radius = radius
+        this.color = color
     }
 }
 
@@ -49,23 +75,6 @@ function startGame() {
 //Draw Player
 var player = new Player(playerPic, canvas.width / 2, canvas.height / 2)
 player.draw()
-
-//Worms Class
-class Worm {
-    constructor(x, y, radius, color) {
-        this.x = x
-        this.y = y
-        this.radius = radius
-        this.color = color
-    }
-
-    draw() {
-        ctx.beginPath()
-        ctx.arc(this.x, this.y, this.radius, Math.PI, 0, false)
-        ctx.fillStyle = this.color
-        ctx.fill()
-    }
-}
 
 //Spawn Worms
 function spawnWorms() {
@@ -89,4 +98,4 @@ function animate() {
     })
 }
 
-//spawnWorms()
+spawnWorms()
