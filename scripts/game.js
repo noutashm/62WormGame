@@ -1,6 +1,6 @@
 var score = 0
 var playerPic = new Image()
-playerPic.src = "../images/side-left.png"
+playerPic.src = "../images/player.png"
 //playerPic.addEventListener("load", loadImage, false);
 
 //Canvas
