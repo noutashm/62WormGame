@@ -48,27 +48,28 @@
             <div class="col">
                 <img src="images/side-left.png" class="left-img img-fluid" alt="side-img-left">
             </div>
-            
+
             <div class="col-7 content">
                 <h1 class="display-6">Welcome to Mermaids Piha Lodges</h1>
                 <div class="row">
-                 <div class = "col-2 ">
-                    <p>Check in</p>
-                    <input type="date" id = "checkIn">
-                 </div>
-                 <div class = "col-5">
-                    <p>Check out</p>
-                    <input type="date" id = "checkOut">
-                 </div>
-                 <div class = "col-6">
-                    <p>Number of people</p>
-                    <input type = "number" id="numAdults"min="1" max="10">
-                 </div>
-                
+                    <div class="col-2 ">
+                        <p>Check in</p>
+                        <input type="date" id="checkIn">
+                    </div>
+                    <div class="col-5">
+                        <p>Check out</p>
+                        <input type="date" id="checkOut">
+                    </div>
+                    <div class="col-6">
+                        <p>Number of people</p>
+                        <input type="number" id="numAdults" min="1" max="10">
+                    </div>
+
                 </div>
-                <div class = "row">
+                <div class="row">
                     <div class="col-2">
-                    <button  class= "searchBtn"data-toggle="popover" title="Popover Header" data-content="Some content inside the popover">Search</button>
+                        <button class="searchBtn" data-toggle="popover" title="Popover Header"
+                            data-content="Some content inside the popover">Search</button>
                     </div>
                 </div>
                 <div class="row">
@@ -78,14 +79,22 @@
                         </p>
 
                     </div>
-                    <div class="col-2" >
-                   
-                   
-                   <canvas style="background-image: url('images/lodge\ map.jpg');"id="myCanvas" width="400" height="410" ></canvas> 
-                   <a href="#" data-toggle="popover" title="Popover Header" data-content="Some content inside the popover">Toggle popover</a>
-                   
-                  
-                   </div>
+                    <div class="col-2">
+
+
+                        <canvas style="background-image: url('images/lodge\ map.jpg');" id="myCanvas" width="400"
+                            height="410"></canvas>
+
+                        <a href="#" data-toggle="popover" title="Popover Header"
+                            data-content="Some content inside the popover" id="rec1">
+                            <div class="rect1"></div>
+                        </a>
+                        <a href="#" data-toggle="popover" title="Popover Header"
+                        data-content="Some content inside the popover" id="rec2">
+                        <div class="rect2"></div>
+                    </a>
+
+                    </div>
                 </div>
             </div>
             <div class="col">
@@ -103,8 +112,8 @@
         integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8"
         crossorigin="anonymous"></script>
 
-        
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
 
     <!-- jQuery Library -->
