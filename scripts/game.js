@@ -7,17 +7,24 @@ playerPic.src = "../images/player.png"
 const c = document.getElementById("canvas")
 const ctx = c.getContext("2d")
 
+//Canvas 100% of screen size
+// c.width = window.innerWidth
+// c.height = window.innerHeight
+
 window.addEventListener("keydown", keysPressed, false);
 window.addEventListener("keyup", keysReleased, false);
 
-var x = canvas.width / 2
-var y = canvas.height / 2
+var x = c.width / 2
+var y = c.height / 2
 
-function drawImage() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height)
-    ctx.drawImage(playerPic, x, y)
-}
+var sheetWidth = 267
+var sheetHeight = 400
 
+var playerW = sheetWidth / 4
+var playerH = sheetHeight / 4
+
+var currentFrame = 0
+var trackMovement = 0
 var keys = [];
 
 function keysPressed(e) {
@@ -25,23 +32,26 @@ function keysPressed(e) {
 
     // left
     if (keys[37] || keys[65]) {
-        x -= 2;
+        x -= 2
+        trackMovement = 1
     }
 
     // down
     if (keys[38] || keys[87]) {
-        y -= 2;
+        y -= 2
+        trackMovement = 3
     }
 
     // right
     if (keys[39] || keys[68]) {
-        x += 2;
+        x += 2
+        trackMovement = 2
     }
 
     // up
     if (keys[40] || keys[83]) {
         y += 2
-            ;
+        trackMovement = 0
     }
     e.preventDefault();
     drawImage();
@@ -49,11 +59,38 @@ function keysPressed(e) {
 
 function keysReleased(e) {
     keys[e.keyCode] = false;
+    trackMovement = 0
 }
 
-//Canvas 100% of screen size
-c.width = window.innerWidth
-c.height = window.innerHeight
+function updateFrame() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height)
+    currentFrame = ++currentFrame % 4;
+    srcX = currentFrame * playerW
+    srcY = 3
+    switch (trackMovement) {
+        case 0:
+            srcY = trackMovement * playerH
+            break;
+        case 1:
+            srcY = trackMovement * playerH
+            break;
+        case 2:
+            srcY = trackMovement * playerH
+            break;
+        case 3:
+            srcY = trackMovement * playerH
+            break;
+    }
+}
+
+function drawImage() {
+    updateFrame()
+    ctx.drawImage(playerPic, srcX, srcY, playerW, playerH, x, y, playerW, playerH)
+}
+
+setInterval(function () {
+    drawImage()
+}, 200)
 
 //======================CLASSES===========================//
 
