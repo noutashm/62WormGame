@@ -1,6 +1,6 @@
 var score = 0
-var playerPic = new Image()
-playerPic.src = "../images/player.png"
+var player = new Image()
+player.src = "../images/player.png"
 //playerPic.addEventListener("load", loadImage, false);
 
 //Canvas
@@ -27,6 +27,7 @@ var currentFrame = 0
 var trackMovement = 0
 var keys = [];
 
+// you can restrict movement here bruv
 function keysPressed(e) {
     keys[e.keyCode] = true;
 
@@ -37,13 +38,13 @@ function keysPressed(e) {
     }
 
     // down
-    if (keys[38] || keys[87]) {
+    if (keys[38] || keys[87] && y <= (c.height - playerH - 10)) {
         y -= 2
         trackMovement = 3
     }
 
     // right
-    if (keys[39] || keys[68]) {
+    if (keys[39] || keys[68] && x < (c.width - playerW - 10)) {
         x += 2
         trackMovement = 2
     }
@@ -81,15 +82,26 @@ function updateFrame() {
             srcY = trackMovement * playerH
             break;
     }
+    if (player.srcX > canvas.width) {
+        player.srcX = canvas.width;
+    } else if (player.srcX < 0) {
+        player.srcX = 0;
+    }
+    if (player.srcY > canvas.height) {
+        player.srcY = canvas.height;
+    } else if (player.srcY < 0) {
+        player.srcY = 0;
+    }
 }
 
 function drawImage() {
     updateFrame()
-    ctx.drawImage(playerPic, srcX, srcY, playerW, playerH, x, y, playerW, playerH)
+    ctx.drawImage(player, srcX, srcY, playerW, playerH, x, y, playerW, playerH)
 }
 
 setInterval(function () {
     drawImage()
+    //requestAnimationFrame(updateFrame)
 }, 200)
 
 //======================CLASSES===========================//
@@ -166,3 +178,7 @@ class Worm extends GameObject {
 // }
 
 //spawnWorms()
+
+function getRandomInt(min, max) {
+    return Math.floor((Math.random() * max) + min);
+}
