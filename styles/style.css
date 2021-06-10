@@ -8,7 +8,7 @@
 html, body {
   width:  100%;
   height: 100%;
-  overflow: scroll;
+  overflow: hidden;
 }
 
 /*=============== Nav =================*/
@@ -75,7 +75,10 @@ ctx:hover{
 
 /*=============== Game =================*/
 canvas {
+  margin: auto;
+  display: block;
   background-color: lightblue;
+  background-image: url("../images/bg-options/test.png");
 }
 
 .back-btn {
