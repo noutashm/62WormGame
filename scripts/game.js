@@ -38,7 +38,7 @@ function keysPressed(e) {
         trackMovement = 1
     }
 
-    if (keys[38] || keys[87] && y >= 0) { // up //TODO: gotta fix to restrict water movement
+    if (keys[38] || keys[87] && y >= 110) { // up
         y -= 4
         trackMovement = 3
     }
@@ -58,7 +58,7 @@ function keysPressed(e) {
         //TODO: what happens if space is hit?
     }
     e.preventDefault();
-    drawImage();
+    drawPlayer();
 }
 
 function keysReleased(e) {
@@ -87,22 +87,35 @@ function updateFrame() {
     }
 }
 
-function drawImage() {
+function drawPlayer() {
     updateFrame()
     ctx.drawImage(player, srcX, srcY, playerW, playerH, x, y, playerW, playerH)
 }
 
 setInterval(function () {
-    drawImage()
+    drawPlayer()
+    spawnWorm(50)
     //requestAnimationFrame(updateFrame)
-}, 200)
+}, 300)
 
 //Worms Class
-class Worm {
-    constructor(radius, color) {
-        this.radius = radius
-        this.color = color
-    }
+
+function spawnWorm(r) {
+    var grad = ctx.createRadialGradient(300, 100, 0, 300, 100, 316.23)
+    grad.addColorStop(0, 'rgba(255, 255, 255, 1)');
+    grad.addColorStop(1, 'rgba(255, 231, 132, 1)');
+
+    const x = Math.random() * c.width
+    const y = Math.random() * c.height + 150
+
+    ctx.beginPath()
+    ctx.fillStyle = grad
+    ctx.arc(x, y, r, Math.PI, 0, false)
+    ctx.fill()
+    ctx.lineWidth = 1
+    ctx.strokeStyle = 'black'
+    ctx.closePath()
+    ctx.stroke()
 }
 
 // function startGame() {
@@ -110,24 +123,10 @@ class Worm {
 //     startMenu.show()
 // }
 
-//Draw Player
-// var player = new Player(playerPic, canvas.width / 2, canvas.height / 2)
-// player.draw()
-
 //Spawn Worms
-// function spawnWorms() {
-//     setInterval(() => {
-//         const x = Math.random() * canvas.width
-//         const y = Math.random() * canvas.height
-//         const radius = Math.random() * 30
-//         const color = 'red'
+setInterval(() => {
 
-//         worms = new Worm(x, y, radius, color)
-//         worms.draw()
-//         console.log('Enemy')
-//     }, 1000)
-// }
-
+}, 2000)
 // function animate() {
 //     requestAnimationFrame(animate)
 //     c.clearRect(0, 0, canvas.width, canvas.height)
@@ -135,8 +134,6 @@ class Worm {
 //         enemy.update
 //     })
 // }
-
-//spawnWorms()
 
 function getRandomInt(min, max) {
     return Math.floor((Math.random() * max) + min);
