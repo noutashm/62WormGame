@@ -105,7 +105,6 @@ class Worm {
         this.y = y
         this.radius = radius
         this.speed = speed
-        this.draw()
     }
 
     draw() {
