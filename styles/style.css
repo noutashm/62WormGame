@@ -108,7 +108,7 @@ body {
 canvas {
   display: block;
   margin: auto;
-  background-image: url("../images/bg-options/test.png");
+  background-image: url("../images/bg.png");
   background-size: cover;
 }
 

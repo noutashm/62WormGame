@@ -1,6 +1,8 @@
 var score = 0
 var player = new Image()
 player.src = "../images/player.png"
+var sad = new Audio('../sound/sad.wav')
+var happy = new Audio('../sound/happy.wav')
 
 //Canvas
 const c = document.getElementById("canvas")
@@ -51,8 +53,8 @@ function keysPressed(e) {
         trackMovement = 0
     }
 
-    //space - action
-    if (keys[32]) {
+    if (keys[32]) { //space - action
+        sad.play()
         //TODO: what happens if space is hit?
     }
     e.preventDefault();
