@@ -57,53 +57,107 @@ body {
   text-align: center;
 }
 
+#btn{
+  padding-top: 20px;
+}
 .searchBtn {
-  background-color: green;
+  background-color: rgb(15, 83, 230);
   color: white;
   text-align: center;
-  padding: 10px 20px;
+ padding: 10px 20px;
   font-size: 15px;
   cursor: pointer;
   display: inline-block;
+  
 }
 
 .col-2 {
-  margin-left: 200px;
+ 
+  margin-left: 100px;
   position: relative;
 }
 
+.col-1{
+  padding-top: 100px;
+  width: max-content;
+}
 
-
-#rec1 {
-  position: absolute;
+#lodge1{ position: absolute;
   top: 75px;
   left: 55px;
+  width: 40px;
+  height:70px
 }
 
-.rect1 {
-  width: 70px;
-  height: 90px;
-  background-color: blue;
-}
-
-.rect1:hover {
-  background-color: yellow;
-}
-
-#rec2 {
-  position: absolute;
-  top: 180px;
+#lodge2{position: absolute;
+  top: 175px;
   left: 55px;
-}
-.rect2 {
-  width: 70px;
-  height: 70px;
-  background-color: blue;
-}
+  width: 40px;
+  height:60px}
 
-.rect2:hover {
-  background-color: yellow;
-}
+#lodge3{position: absolute;
+  top: 320px;
+  left: 20px;
+  width: 60px;
+  height:60px}
+
+
+  #lodge4{ position: absolute;
+    top: 75px;
+    left: 165px;
+    width: 40px;
+    height:70px
+  }
+
+  #lodge5{ position: absolute;
+    top: 205px;
+    left: 160px;
+    width: 50px;
+    height:45px
+  }
+
+  #lodge6{ position: absolute;
+    top: 330px;
+    left: 170px;
+    width: 50px;
+    height:55px
+  }
+
+  #lodge7{ position: absolute;
+    top: 0px;
+    left: 300px;
+    width: 50px;
+    height:25px
+  }
+
+  #lodge8{ position: absolute;
+    top: 80px;
+    left: 280px;
+    width: 60px;
+    height:65px
+  }
+
+  #lodge9{ position: absolute;
+    top: 210px;
+    left: 280px;
+    width: 60px;
+    height:70px
+  }
+
+  #lodge10{ position: absolute;
+    top: 350px;
+    left: 280px;
+    width: 60px;
+    height:40px
+  }
+  
+  #image1{
+    width:200px;
+    height:150px
+  }
+
+   
+  
 /*=============== Game =================*/
 canvas {
   display: block;
