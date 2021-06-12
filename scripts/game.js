@@ -1,7 +1,6 @@
 var score = 0
 var player = new Image()
 player.src = "../images/player.png"
-//playerPic.addEventListener("load", loadImage, false);
 
 //Canvas
 const c = document.getElementById("canvas")
@@ -14,9 +13,11 @@ const ctx = c.getContext("2d")
 window.addEventListener("keydown", keysPressed, false);
 window.addEventListener("keyup", keysReleased, false);
 
+// player co-ordinates
 var x = c.width / 2
 var y = c.height / 2
 
+//sprite sheet
 var sheetWidth = 267
 var sheetHeight = 400
 
@@ -27,32 +28,32 @@ var currentFrame = 0
 var trackMovement = 0
 var keys = [];
 
-// you can restrict movement here bruv
 function keysPressed(e) {
     keys[e.keyCode] = true;
 
-    // left
-    if (keys[37] || keys[65]) {
-        x -= 2
+    if (keys[37] || keys[65] && x >= 0) { // left
+        x -= 4
         trackMovement = 1
     }
 
-    // down
-    if (keys[38] || keys[87] && y <= (c.height - playerH - 10)) {
-        y -= 2
+    if (keys[38] || keys[87] && y >= 0) { // up //TODO: gotta fix to restrict water movement
+        y -= 4
         trackMovement = 3
     }
 
-    // right
-    if (keys[39] || keys[68] && x < (c.width - playerW - 10)) {
-        x += 2
+    if (keys[39] || keys[68] && x <= (c.width - playerW + 5)) { // right
+        x += 4
         trackMovement = 2
     }
 
-    // up
-    if (keys[40] || keys[83]) {
-        y += 2
+    if (keys[40] || keys[83] && y <= (c.height - playerH)) { // down
+        y += 4
         trackMovement = 0
+    }
+
+    //space - action
+    if (keys[32]) {
+        //TODO: what happens if space is hit?
     }
     e.preventDefault();
     drawImage();
@@ -82,16 +83,6 @@ function updateFrame() {
             srcY = trackMovement * playerH
             break;
     }
-    if (player.srcX > canvas.width) {
-        player.srcX = canvas.width;
-    } else if (player.srcX < 0) {
-        player.srcX = 0;
-    }
-    if (player.srcY > canvas.height) {
-        player.srcY = canvas.height;
-    } else if (player.srcY < 0) {
-        player.srcY = 0;
-    }
 }
 
 function drawImage() {
@@ -104,42 +95,8 @@ setInterval(function () {
     //requestAnimationFrame(updateFrame)
 }, 200)
 
-//======================CLASSES===========================//
-
-class GameObject {
-    constructor(x, y, width, height) {
-        this.x = x
-        this.y = y
-        this.width = width
-        this.height = height
-    }
-
-    draw() {
-        ctx.beginPath()
-        ctx.arc(this.x, this.y, this.radius, Math.PI, 0, false)
-        ctx.fill()
-    }
-
-    update() {
-
-    }
-}
-
-//Player Class
-// class Player extends GameObject {
-//     constructor() {
-//     }
-
-//     draw() {
-//         //let pos = this.positions[position]
-//         ctx.drawImage(this.img, this.x, this.y)
-//         //ctx.fillStyle = this.color
-//         ctx.fill()
-//     }
-// }
-
 //Worms Class
-class Worm extends GameObject {
+class Worm {
     constructor(radius, color) {
         this.radius = radius
         this.color = color
