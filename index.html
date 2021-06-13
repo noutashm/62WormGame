@@ -59,7 +59,7 @@
 
                     <div class="col-6">
                         <p>Number of people</p>
-                        <input type="number" id="numAdults" min="1" max="8">
+                        <input type="number" id="numPeople" min="1" max="8">
                     </div>
 
                     <div class="col-2 ">
@@ -70,17 +70,17 @@
                         <p>Check out</p>
                         <input type="date" id="checkOut">
                     </div>
-                  
-                   
+                    <p id="demo"></p>
+
                 </div>
                 <div class="row">
                     <div class="col-2" id="btn">
-                        <button class="searchBtn" >Search</button>
+                        <button class="searchBtn" onclick="Search()">Search</button>
                     </div>
 
                 </div>
                 <div class="row">
-                    <div class="col-1" >
+                    <div class="col-1">
                         <strong>
                             Steps for booking
                         </strong>
@@ -97,28 +97,18 @@
                         <canvas style="background-image: url('images/lodge\ map.jpg');" id="myCanvas" width="400"
                             height="410"></canvas>
 
-                       
-
-                        <a class="btn btn-lg btn-primary" id="lodge1">Lodge 1</a>
-
-                        <a class="btn btn-lg btn-primary" id="lodge2">Lodge 2</a>
-
-                        <a class="btn btn-lg btn-primary" id="lodge3">Lodge 3</a>
-
-                        <a class="btn btn-lg btn-primary" id="lodge4">Lodge 4</a>
-
-                        <a class="btn btn-lg btn-primary" id="lodge5">Lodge 5</a>
-
-                        <a class="btn btn-lg btn-primary" id="lodge6">Lodge 6</a>
-
-                        <a class="btn btn-lg btn-primary" id="lodge7">Lodge 7</a>
-
-                        <a class="btn btn-lg btn-primary" id="lodge8">Lodge 8</a>
-
-                        <a class="btn btn-lg btn-primary" id="lodge9">Lodge 9</a>
-
-                        <a class="btn btn-lg btn-primary" id="lodge10">Lodge 10</a>
-
+                        <div id="lodgesBtn">
+                            <a class="btn btn-lg btn-primary" class="lodge" id="lodge1">Lodge 1</a>
+                            <a class="btn btn-lg btn-primary" class="lodge" id="lodge2">Lodge 2</a>
+                            <a class="btn btn-lg btn-primary" class="lodge" id="lodge3">Lodge 3</a>
+                            <a class="btn btn-lg btn-primary" class="lodge" id="lodge4">Lodge 4</a>
+                            <a class="btn btn-lg btn-primary" class="lodge" id="lodge5">Lodge 5</a>
+                            <a class="btn btn-lg btn-primary" class="lodge" id="lodge6">Lodge 6</a>
+                            <a class="btn btn-lg btn-primary" class="lodge" id="lodge7">Lodge 7</a>
+                            <a class="btn btn-lg btn-primary" class="lodge" id="lodge8">Lodge 8</a>
+                            <a class="btn btn-lg btn-primary" class="lodge" id="lodge9">Lodge 9</a>
+                            <a class="btn btn-lg btn-primary" class="lodge" id="lodge10">Lodge 10</a>
+                        </div>
 
                     </div>
                 </div>
@@ -127,6 +117,33 @@
                 <img src="images/side-right.png" class="right-img img-fluid" alt="side-img-right">
             </div>
         </div>
+        
+        <form class="bookingSummary" id="summaryform">
+
+
+            <h2>Summary</h2>
+            <br><br>
+            
+            <div id="roombooking">
+                <p id="sName"></p>
+                <p id="sNumber"></p>
+                <p id="sCheckindate"></p>
+                <p id="sCheckoutdate"></p>
+               
+                <p id="stotaldays"></p>
+                <p id="spriceperday"></p>
+                <p id="stotalprice"></p>
+            </div>
+           
+           
+
+           
+            
+            <button type="submit" onclick="submitfrm()" class="btnstyle" id="btnconfirm">Confirm your booking </button>
+    
+
+        </form>
+    
     </main>
 
 
