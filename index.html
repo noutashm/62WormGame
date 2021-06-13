@@ -53,6 +53,16 @@
                 <h1 class="display-6">Welcome to Mermaids Piha Lodges</h1>
                 <div class="row">
                     <div class="col-2 ">
+                        <p>Name</p>
+                        <input type="text" id="name">
+                    </div>
+
+                    <div class="col-6">
+                        <p>Number of people</p>
+                        <input type="number" id="numAdults" min="1" max="8">
+                    </div>
+
+                    <div class="col-2 ">
                         <p>Check in</p>
                         <input type="date" id="checkIn">
                     </div>
@@ -60,23 +70,25 @@
                         <p>Check out</p>
                         <input type="date" id="checkOut">
                     </div>
-                    <div class="col-6">
-                        <p>Number of people</p>
-                        <input type="number" id="numAdults" min="1" max="10">
+                  
+                   
+                </div>
+                <div class="row">
+                    <div class="col-2" id="btn">
+                        <button class="searchBtn" >Search</button>
                     </div>
 
                 </div>
                 <div class="row">
-                    <div class="col-2">
-                        <button class="searchBtn" data-toggle="popover" title="Popover Header"
-                            data-content="Some content inside the popover">Search</button>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-1">
-                        <p>
+                    <div class="col-1" >
+                        <strong>
                             Steps for booking
-                        </p>
+                        </strong>
+                        <li>Enter your name and number of people</li>
+                        <li>Set the Check-in and Check-out Date</li>
+                        <li>Hover over the Availaible lodges to see the details</li>
+                        <li>Click on the lodge to book </li>
+                        <li>confirm your booking</li>
 
                     </div>
                     <div class="col-2">
@@ -85,14 +97,28 @@
                         <canvas style="background-image: url('images/lodge\ map.jpg');" id="myCanvas" width="400"
                             height="410"></canvas>
 
-                        <a href="#" data-toggle="popover" title="Popover Header"
-                            data-content="Some content inside the popover" id="rec1">
-                            <div class="rect1"></div>
-                        </a>
-                        <a href="#" data-toggle="popover" title="Popover Header"
-                        data-content="Some content inside the popover" id="rec2">
-                        <div class="rect2"></div>
-                    </a>
+                       
+
+                        <a class="btn btn-lg btn-primary" id="lodge1">Lodge 1</a>
+
+                        <a class="btn btn-lg btn-primary" id="lodge2">Lodge 2</a>
+
+                        <a class="btn btn-lg btn-primary" id="lodge3">Lodge 3</a>
+
+                        <a class="btn btn-lg btn-primary" id="lodge4">Lodge 4</a>
+
+                        <a class="btn btn-lg btn-primary" id="lodge5">Lodge 5</a>
+
+                        <a class="btn btn-lg btn-primary" id="lodge6">Lodge 6</a>
+
+                        <a class="btn btn-lg btn-primary" id="lodge7">Lodge 7</a>
+
+                        <a class="btn btn-lg btn-primary" id="lodge8">Lodge 8</a>
+
+                        <a class="btn btn-lg btn-primary" id="lodge9">Lodge 9</a>
+
+                        <a class="btn btn-lg btn-primary" id="lodge10">Lodge 10</a>
+
 
                     </div>
                 </div>
@@ -111,10 +137,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-p34f1UUtsS3wqzfto5wAAmdvj+osOnFyQFpp4Ua3gs/ZVWx6oOypYoCJhGGScy+8"
         crossorigin="anonymous"></script>
-
-
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-
 
     <!-- jQuery Library -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
