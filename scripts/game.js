@@ -97,7 +97,6 @@ function updateFrame() {
             srcY = trackMovement * player.height
             break;
     }
-    ctx.drawImage(playerImg, srcX, srcY, player.width, player.height, player.x, player.y, player.width, player.height)
 }
 
 class GameObject {
@@ -121,7 +120,7 @@ class Worm extends GameObject {
         this.draw = this.draw.bind(this)
         this.update = this.update.bind(this)
         this.timeout = this.timeout.bind(this)
-        setTimeout(this.timeout, getRandomInRange(1000, 10000))
+        setTimeout(this.timeout, getRandomInt(1000, 10000))
     }
 
     timeout() {
@@ -176,8 +175,8 @@ class Worm extends GameObject {
 
                 break;
             case 3:
-                this.x = getRandomInRange(50, 950);
-                this.y = getRandomInRange(250, 600);
+                this.x = getRandomInt(50, 950);
+                this.y = getRandomInt(250, 600);
                 this.lifeCycle = 0;
                 break;
         }
@@ -190,20 +189,20 @@ function drawPlayer() {
     ctx.drawImage(playerImg, srcX, srcY, player.width, player.height, player.x, player.y, player.width, player.height)
 }
 
-function spawnWorm(x, y, r) {
-    var grad = ctx.createRadialGradient(300, 100, 0, 300, 100, 316.23)
-    grad.addColorStop(0, 'rgba(255, 255, 255, 1)');
-    grad.addColorStop(1, 'rgba(255, 231, 132, 1)');
+// function spawnWorm(x, y, r) {
+//     var grad = ctx.createRadialGradient(300, 100, 0, 300, 100, 316.23)
+//     grad.addColorStop(0, 'rgba(255, 255, 255, 1)');
+//     grad.addColorStop(1, 'rgba(255, 231, 132, 1)');
 
-    ctx.beginPath()
-    ctx.fillStyle = grad
-    ctx.arc(x, y, r, Math.PI, 0, false)
-    ctx.fill()
-    ctx.lineWidth = 1
-    ctx.strokeStyle = 'black'
-    ctx.closePath()
-    ctx.stroke()
-}
+//     ctx.beginPath()
+//     ctx.fillStyle = grad
+//     ctx.arc(x, y, r, Math.PI, 0, false)
+//     ctx.fill()
+//     ctx.lineWidth = 1
+//     ctx.strokeStyle = 'black'
+//     ctx.closePath()
+//     ctx.stroke()
+// }
 
 function startGame() {
 
@@ -211,8 +210,11 @@ function startGame() {
 
     for (i = 10; i < 10; i++) {
         var worm = new Worm(getRandomInt(12, c.width - 12), getRandomInt(170, c.height), getRandomInt(-1, 1), getRandomInt(-1, 1), 10)
-        wormHorde.push(worm)
         console.log(worm)
+        worm.draw()
+        worm.update()
+        wormHorde.push(worm)
+        console.log(wormHorde);
     }
     //window.requestAnimationFrame(drawPlayer)
 }
