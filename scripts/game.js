@@ -9,34 +9,39 @@ var happy = new Audio('../sound/happy.wav')
 const c = document.getElementById("canvas")
 const ctx = c.getContext("2d")
 
-var player = {
-    y: 0,
-    x: 0,
-    width: 0,
-    height: 0
-}
-
-player.x = c.width / 2
-player.y = c.height / 2
-
 //sprite sheet
 var sheet = {
     width: 267,
     height: 400
 }
 
-player.width = sheet.width / 4
-player.height = sheet.height / 4
+var player = {
+    x: c.width / 2,
+    y: c.height / 2,
+    vx: 0,
+    vy: 0,
+    width: sheet.width / 4,
+    height: sheet.height / 4
+}
+
+var worm = {
+    x: getRandomInt(12, c.width - 12),
+    y: getRandomInt(170, c.height),
+    vx: getRandomInt(-1, 1),
+    vy: getRandomInt(-1, 1),
+    radius: 10,
+    lifeCycle: 0
+}
 
 var currentFrame = 0
 
-window.addEventListener("keydown", keysPressed, false);
-window.addEventListener("keyup", keysReleased, false);
+window.addEventListener("keydown", keysPressed, false)
+window.addEventListener("keyup", keysReleased, false)
 var trackMovement = 0
-var keys = [];
+var keys = []
 
 function keysPressed(e) {
-    keys[e.keyCode] = true;
+    keys[e.keyCode] = true
 
     if (keys[37] || keys[65] && player.x >= 0) { // left
         player.x -= 4
@@ -60,141 +65,177 @@ function keysPressed(e) {
 
     if (keys[32]) { //space - action
         // if (hypot(zombie.x - shot.x, zombie.y - shot.y) < 10) {
-        //     zombieHorde.splice(i, 1);
-        //     shots.splice(j, 1);
-        //     spawnZombie();
-        //     spawnZombie();
+        //     zombieHorde.splice(i, 1)
+        //     shots.splice(j, 1)
+        //     spawnZombie()
+        //     spawnZombie()
         //     score++
         // }
         sad.play()
         //TODO: what happens if space is hit?
     }
-    e.preventDefault();
-    draw();
+    e.preventDefault()
+    draw()
 }
 
 function keysReleased(e) {
-    keys[e.keyCode] = false;
+    keys[e.keyCode] = false
     trackMovement = 0
 }
 
 function updateFrame() {
     ctx.clearRect(0, 0, c.width, c.height)
-    currentFrame = ++currentFrame % 4;
-    srcX = currentFrame * player.width
-    srcY = 3
+    currentFrame = ++currentFrame % 4
+    player.vx = currentFrame * player.width
+    player.vy = 3
     switch (trackMovement) {
         case 0:
-            srcY = trackMovement * player.height
-            break;
+            player.vy = trackMovement * player.height
+            break
         case 1:
-            srcY = trackMovement * player.height
-            break;
+            player.vy = trackMovement * player.height
+            break
         case 2:
-            srcY = trackMovement * player.height
-            break;
+            player.vy = trackMovement * player.height
+            break
         case 3:
-            srcY = trackMovement * player.height
-            break;
+            player.vy = trackMovement * player.height
+            break
+    }
+
+    switch (worm.lifeCycle) {
+        case 0:
+            worm.x += worm.vx
+            worm.y += worm.vy
+            worm.lifeCycle = 1
+            break
+
+        case 1:
+            worm.x += worm.vx
+            worm.y += worm.vy
+            worm.radius += 0.1
+            if (worm.radius > 30) {
+                worm.lifeCycle = 2
+            }
+            break
+
+        case 2:
+            worm.x += worm.vx
+            worm.y += worm.vy
+            worm.radius -= 0.1
+            if (worm.radius < 1) {
+                worm.lifeCycle = 3
+            }
+            break
+
+        case 3:
+            worm.x = getRandomInt(12, c.width - 12)
+            worm.y = getRandomInt(170, c.height)
+            worm.lifeCycle = 0
+            break
     }
 }
 
-class Worm {
-    constructor(x, y, vx, vy, radius) {
-        this.x = x
-        this.y = y
-        this.vx = vx
-        this.vy = vy
-        this.radius = radius
-        this.lifeCycle = 0
-    }
+// class Worm {
+//     constructor(x, y, vx, vy, radius) {
+//         this.x = x
+//         this.y = y
+//         this.vx = vx
+//         this.vy = vy
+//         this.radius = radius
+//         this.lifeCycle = 0
 
-    timeout() {
-        this.enabled = true;
-    }
+//         this.draw = this.draw.bind(this)
+//         this.update = this.update.bind(this)
+//         this.timeout = this.timeout.bind(this)
+//         setTimeout(this.timeout, getRandomInt(1000, 10000))
+//     }
 
-    draw() {
-        var grad = ctx.createRadialGradient(300, 100, 0, 300, 100, 316.23)
-        grad.addColorStop(0, 'rgba(255, 255, 255, 1)');
-        grad.addColorStop(1, 'rgba(255, 231, 132, 1)');
+//     timeout() {
+//         this.enabled = true
+//     }
 
-        ctx.beginPath()
-        ctx.fillStyle = grad
-        ctx.arc(this.x, this.y, this.radius, Math.PI, 0, false)
-        ctx.fill()
-        ctx.lineWidth = 1
-        ctx.strokeStyle = 'black'
-        ctx.closePath()
-        ctx.stroke()
-    }
+//     draw() {
+//         var grad = ctx.createRadialGradient(300, 100, 0, 300, 100, 316.23)
+//         grad.addColorStop(0, 'rgba(255, 255, 255, 1)')
+//         grad.addColorStop(1, 'rgba(255, 231, 132, 1)')
 
-    update() {
-        if (this.enabled == false) {
-            return;
-        }
+//         ctx.beginPath()
+//         ctx.fillStyle = grad
+//         ctx.arc(this.x, this.y, this.radius, Math.PI, 0, false)
+//         ctx.fill()
+//         ctx.lineWidth = 1
+//         ctx.strokeStyle = 'black'
+//         ctx.closePath()
+//         ctx.stroke()
+//     }
 
-        switch (this.lifeCycle) {
-            case 0:
-                this.x += this.vx;
-                this.y += this.vy;
-                this.lifeCycle = 1;
+//     update() {
+//         if (this.enabled == false) {
+//             return
+//         }
 
-                break;
-            case 1:
-                this.x += this.vx;
-                this.y += this.vy;
-                this.radius += 0.1;
-                if (this.radius > 30) {
-                    this.lifeCycle = 2;
-                }
+//         switch (this.lifeCycle) {
+//             case 0:
+//                 this.x += this.vx
+//                 this.y += this.vy
+//                 this.lifeCycle = 1
 
-                break;
-            case 2:
-                this.x += this.vx;
-                this.y += this.vy;
-                this.radius -= 0.1;
-                if (this.radius < 1) {
-                    this.lifeCycle = 3;
-                }
+//                 break
+//             case 1:
+//                 this.x += this.vx
+//                 this.y += this.vy
+//                 this.radius += 0.1
+//                 if (this.radius > 30) {
+//                     this.lifeCycle = 2
+//                 }
 
-                break;
-            case 3:
-                this.x = getRandomInt(50, 950);
-                this.y = getRandomInt(250, 600);
-                this.lifeCycle = 0;
-                break;
-        }
+//                 break
+//             case 2:
+//                 this.x += this.vx
+//                 this.y += this.vy
+//                 this.radius -= 0.1
+//                 if (this.radius < 1) {
+//                     this.lifeCycle = 3
+//                 }
 
-    }
-}
+//                 break
+//             case 3:
+//                 this.x = getRandomInt(50, 950)
+//                 this.y = getRandomInt(250, 600)
+//                 this.lifeCycle = 0
+//                 break
+//         }
+
+//     }
+// }
 
 function draw() {
     updateFrame()
-    ctx.drawImage(playerImg, srcX, srcY, player.width, player.height, player.x, player.y, player.width, player.height)
+    ctx.drawImage(playerImg, player.vx, player.vy, player.width, player.height, player.x, player.y, player.width, player.height)
+
+    spawnWorm(getRandomInt(12, c.width - 12), getRandomInt(170, c.height), 10)
 }
 
-// function spawnWorm(x, y, r) {
-//     var grad = ctx.createRadialGradient(300, 100, 0, 300, 100, 316.23)
-//     grad.addColorStop(0, 'rgba(255, 255, 255, 1)');
-//     grad.addColorStop(1, 'rgba(255, 231, 132, 1)');
-
-//     ctx.beginPath()
-//     ctx.fillStyle = grad
-//     ctx.arc(x, y, r, Math.PI, 0, false)
-//     ctx.fill()
-//     ctx.lineWidth = 1
-//     ctx.strokeStyle = 'black'
-//     ctx.closePath()
-//     ctx.stroke()
-// }
+function spawnWorm(x, y, r) {
+    var grad = ctx.createRadialGradient(300, 100, 0, 300, 100, 316.23)
+    grad.addColorStop(0, 'rgba(255, 255, 255, 1)')
+    grad.addColorStop(1, 'rgba(255, 231, 132, 1)')
+    ctx.beginPath()
+    ctx.fillStyle = grad
+    ctx.arc(x, y, r, Math.PI, 0, false)
+    ctx.fill()
+    ctx.lineWidth = 1
+    ctx.strokeStyle = 'black'
+    ctx.closePath()
+    ctx.stroke()
+}
 
 function startGame() {
 
     setInterval(() => {
-
-
         draw()
-    }, 200);
+    }, 200)
     //window.requestAnimationFrame(drawPlayer)
 }
 
@@ -209,16 +250,16 @@ function gameLoop(time) {
             ScoreBoard.drawEnd(myGameArea.context)
     }
     else {
-        updateGameArea();
-        draw();
+        updateGameArea()
+        draw()
     }
-    window.requestAnimationFrame(gameLoop);
+    window.requestAnimationFrame(gameLoop)
 }
 
 function hypot(length1, length2) {
-    return Math.sqrt((length1 * length1) + (length2 * length2));
+    return Math.sqrt((length1 * length1) + (length2 * length2))
 }
 
 function getRandomInt(min, max) {
-    return Math.floor((Math.random() * max) + min);
+    return Math.floor((Math.random() * max) + min)
 }
