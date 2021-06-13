@@ -70,7 +70,7 @@ function keysPressed(e) {
         //TODO: what happens if space is hit?
     }
     e.preventDefault();
-    drawPlayer();
+    draw();
 }
 
 function keysReleased(e) {
@@ -99,28 +99,14 @@ function updateFrame() {
     }
 }
 
-class GameObject {
-    constructor(x, y, vx, vy, width, height) {
-        this.x = x;
-        this.y = y;
-        this.vx = vx;
-        this.vy = vy;
-        this.width = width;
-        this.height = height;
-        this.isColliding = false;
-    }
-}
-
-class Worm extends GameObject {
+class Worm {
     constructor(x, y, vx, vy, radius) {
-        super(x, y, vx, vy)
+        this.x = x
+        this.y = y
+        this.vx = vx
+        this.vy = vy
         this.radius = radius
         this.lifeCycle = 0
-
-        this.draw = this.draw.bind(this)
-        this.update = this.update.bind(this)
-        this.timeout = this.timeout.bind(this)
-        setTimeout(this.timeout, getRandomInt(1000, 10000))
     }
 
     timeout() {
@@ -140,8 +126,6 @@ class Worm extends GameObject {
         ctx.strokeStyle = 'black'
         ctx.closePath()
         ctx.stroke()
-
-        wormHorde.push(worm);
     }
 
     update() {
@@ -184,7 +168,7 @@ class Worm extends GameObject {
     }
 }
 
-function drawPlayer() {
+function draw() {
     updateFrame()
     ctx.drawImage(playerImg, srcX, srcY, player.width, player.height, player.x, player.y, player.width, player.height)
 }
@@ -206,16 +190,11 @@ function drawPlayer() {
 
 function startGame() {
 
-    drawPlayer()
+    setInterval(() => {
 
-    for (i = 10; i < 10; i++) {
-        var worm = new Worm(getRandomInt(12, c.width - 12), getRandomInt(170, c.height), getRandomInt(-1, 1), getRandomInt(-1, 1), 10)
-        console.log(worm)
-        worm.draw()
-        worm.update()
-        wormHorde.push(worm)
-        console.log(wormHorde);
-    }
+
+        draw()
+    }, 200);
     //window.requestAnimationFrame(drawPlayer)
 }
 
