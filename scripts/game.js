@@ -79,7 +79,7 @@ function keysReleased(e) {
 }
 
 function updateFrame() {
-    ctx.clearRect(player.x - 5, player.y, player.width + 10, player.height)
+    ctx.clearRect(0, 0, c.width, c.height)
     currentFrame = ++currentFrame % 4;
     srcX = currentFrame * player.width
     srcY = 3
@@ -97,14 +97,35 @@ function updateFrame() {
             srcY = trackMovement * player.height
             break;
     }
+    ctx.drawImage(playerImg, srcX, srcY, player.width, player.height, player.x, player.y, player.width, player.height)
 }
 
-class Worm {
-    constructor(x, y, radius, speed) {
-        this.x = x
-        this.y = y
+class GameObject {
+    constructor(x, y, vx, vy, width, height) {
+        this.x = x;
+        this.y = y;
+        this.vx = vx;
+        this.vy = vy;
+        this.width = width;
+        this.height = height;
+        this.isColliding = false;
+    }
+}
+
+class Worm extends GameObject {
+    constructor(x, y, vx, vy, radius) {
+        super(x, y, vx, vy)
         this.radius = radius
-        this.speed = speed
+        this.lifeCycle = 0
+
+        this.draw = this.draw.bind(this)
+        this.update = this.update.bind(this)
+        this.timeout = this.timeout.bind(this)
+        setTimeout(this.timeout, getRandomInRange(1000, 10000))
+    }
+
+    timeout() {
+        this.enabled = true;
     }
 
     draw() {
@@ -124,9 +145,43 @@ class Worm {
         wormHorde.push(worm);
     }
 
-    move() {
-        this.x + this.speed
-        this.y + this.speed
+    update() {
+        if (this.enabled == false) {
+            return;
+        }
+
+        switch (this.lifeCycle) {
+            case 0:
+                this.x += this.vx;
+                this.y += this.vy;
+                this.lifeCycle = 1;
+
+                break;
+            case 1:
+                this.x += this.vx;
+                this.y += this.vy;
+                this.radius += 0.1;
+                if (this.radius > 30) {
+                    this.lifeCycle = 2;
+                }
+
+                break;
+            case 2:
+                this.x += this.vx;
+                this.y += this.vy;
+                this.radius -= 0.1;
+                if (this.radius < 1) {
+                    this.lifeCycle = 3;
+                }
+
+                break;
+            case 3:
+                this.x = getRandomInRange(50, 950);
+                this.y = getRandomInRange(250, 600);
+                this.lifeCycle = 0;
+                break;
+        }
+
     }
 }
 
@@ -135,74 +190,49 @@ function drawPlayer() {
     ctx.drawImage(playerImg, srcX, srcY, player.width, player.height, player.x, player.y, player.width, player.height)
 }
 
-var worm = new Worm(getRandomInt(12, c.width - 12), getRandomInt(170, c.height), 10, getRandomInt(-10, 10))
+function spawnWorm(x, y, r) {
+    var grad = ctx.createRadialGradient(300, 100, 0, 300, 100, 316.23)
+    grad.addColorStop(0, 'rgba(255, 255, 255, 1)');
+    grad.addColorStop(1, 'rgba(255, 231, 132, 1)');
 
-console.log(worm);
-setInterval(() => {
-    drawPlayer()
-    //wormLifeCycle()
-    //requestAnimationFrame(updateFrame)
-}, 300)
-
-var trackWorms = 0
-//Spawn Worms
-setInterval(() => {
-    if (trackWorms < 5) {
-        worm.draw()
-        worm.move()
-        trackWorms++
-    }
-}, 2000)
-
-
-// function spawnWorm(x, y, r) {
-//     var grad = ctx.createRadialGradient(300, 100, 0, 300, 100, 316.23)
-//     grad.addColorStop(0, 'rgba(255, 255, 255, 1)');
-//     grad.addColorStop(1, 'rgba(255, 231, 132, 1)');
-
-//     ctx.beginPath()
-//     ctx.fillStyle = grad
-//     ctx.arc(x, y, r, Math.PI, 0, false)
-//     ctx.fill()
-//     ctx.lineWidth = 1
-//     ctx.strokeStyle = 'black'
-//     ctx.closePath()
-//     ctx.stroke()
-
-//     wormHorde.push(worm);
-// }
-
-function wormLifeCycle() {
-    worm.x = Math.random() * c.width
-    worm.y = Math.random() * c.height + 170
-    worm.r = 10
-
-    //spawnWorm(worm.x, worm.y, worm.r)
-
-    worm.x++
-    worm.y++
-
-    var phase1 = true
-    var phase2 = false
-    var phase3 = false
-
-    // var f1 = setTimeout(function () {
-    //     phase1 = false
-    //     phase2 = true
-    // }, 5000);
-
-    // setTimeout(function () {
-    //     phase2 = false
-    //     phase3 = true
-    //     clearInterval(f1)
-    // }, 5000);
+    ctx.beginPath()
+    ctx.fillStyle = grad
+    ctx.arc(x, y, r, Math.PI, 0, false)
+    ctx.fill()
+    ctx.lineWidth = 1
+    ctx.strokeStyle = 'black'
+    ctx.closePath()
+    ctx.stroke()
 }
 
-// function startGame() {
-//     var startMenu = new bootstrap.Modal(document.getElementById('startMenu'), options)
-//     startMenu.show()
-// }
+function startGame() {
 
+    drawPlayer()
+
+    for (i = 10; i < 10; i++) {
+        var worm = new Worm(getRandomInt(12, c.width - 12), getRandomInt(170, c.height), getRandomInt(-1, 1), getRandomInt(-1, 1), 10)
+        wormHorde.push(worm)
+        console.log(worm)
+    }
+    //window.requestAnimationFrame(drawPlayer)
+}
+
+function restartGame() {
+    wormHorde = []
+}
+
+function gameLoop(time) {
+    timeoffset = time
+    if (time > endTime && endTime > 0) {
+        if (ScoreBoard !== null)
+            ScoreBoard.drawEnd(myGameArea.context)
+    }
+    else {
+        updateGameArea();
+        draw();
+    }
+    window.requestAnimationFrame(gameLoop);
+}
 
 function hypot(length1, length2) {
     return Math.sqrt((length1 * length1) + (length2 * length2));
