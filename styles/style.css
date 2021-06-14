@@ -162,30 +162,13 @@ body {
 }*/
   
 /*=============== Game =================*/
-.canvas-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
 canvas {
+  display: block;
+  margin: auto;
   background-image: url("../images/bg.png");
   background-size: cover;
 }
 
-.back-btn {
-  position: absolute;
-  left: 10px;
-  top: 10px;
-  padding: 5px 10px;
-  background-color: #270f0d77;
-  border-radius: 5px;
-  font-size: 12px;
-  box-shadow: rgba(0, 0, 0, 0.5) 5px 5px 20px;
-}
-
-.back-btn a {
-  text-decoration: none;
-  color: #e8be98;
-  font-size: 2em;
+.form-select {
+  width: auto;
 }

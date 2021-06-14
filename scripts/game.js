@@ -6,10 +6,13 @@ var playerImg = new Image()
 playerImg.src = "../images/player.png"
 var sad = new Audio('../sound/sad.wav')
 var happy = new Audio('../sound/happy.wav')
+var start = new Audio('../sound/start-game.wav')
+var over = new Audio('../sound/game-over.wav')
 var trackMovement = 0
 var keys = []
 var fps = 20
 var currentFrame = 0
+var counter = 0
 
 //Canvas
 const c = document.getElementById("canvas")
@@ -180,18 +183,93 @@ function draw() {
 
     //score
     ctx.font = "30px Arial";
-    //ctx.fillStyle = "white";
-    ctx.fillText("Score: " + score, 10, 50);
+    ctx.fillStyle = "black";
+    ctx.fillText("Score: " + score, 10, 40);
+
+    ctx.font = "30px Arial";
+    ctx.fillStyle = "black";
+    ctx.fillText("Timer: " + counter, 10, 70);
 }
 
-window.onload = function startGame() {
-    wormHorde = []
+var startMenuModal = new bootstrap.Modal(document.getElementById('startMenu'))
+var gameOverModal = new bootstrap.Modal(document.getElementById('gameOver'))
 
+window.onload = function startMenu() {
+    startMenuModal.show();
+}
+
+function startGame() {
+    var timer = document.getElementById("timer").value
+    var volume = document.getElementById("volume")
+    var convertedTime = timer * 1000
+
+    happy.volume = volume.value / 100;
+    sad.volume = volume.value / 100;
+    start.volume = volume.value / 100;
+    over.volume = volume.value / 100;
+
+    //make 10 worms
+    wormHorde = []
     for (var i = 0; i < 10; i++) {
         var worm = new Worm(getRandomInt(12, c.width - 12), getRandomInt(170, c.height), getRandomInt(-3, 3), getRandomInt(-3, 3), 20, 100)
         wormHorde.push(worm)
     }
 
+    start.play()
+
+    //timer
+    setInterval(() => {
+        document.getElementById('score').innerHTML = score;
+        gameOverModal.show()
+        over.play()
+    }, convertedTime);
+
+    counter = parseInt(timer)
+    var tm = setInterval(countDown, 1000);
+
+    function countDown() {
+        counter--;
+        if (counter == 0) {
+            clearInterval(tm);
+        }
+    }
+
+    updateFrame()
+}
+
+function restartGame() {
+    var restartTimer = document.getElementById("restartTimer").value
+    var restartVolume = document.getElementById("restartVolume").value
+    var restartConvertedTime = restartTimer * 1000;
+
+    happy.volume = restartVolume.value / 100;
+    sad.volume = restartVolume.value / 100;
+    start.volume = restartVolume.value / 100;
+    over.volume = restartVolume.value / 100;
+
+    wormHorde = []
+    for (var i = 0; i < 10; i++) {
+        var worm = new Worm(getRandomInt(12, c.width - 12), getRandomInt(170, c.height), getRandomInt(-3, 3), getRandomInt(-3, 3), 20, 100)
+        wormHorde.push(worm)
+    }
+
+    start.play()
+
+    setInterval(() => {
+        gameOverModal.show()
+        over.play()
+    }, restartConvertedTime);
+
+    //timer
+    counter = parseInt(restartTimer)
+    var tm = setInterval(countDown, 1000);
+
+    function countDown() {
+        counter--;
+        if (counter == 0) {
+            clearInterval(tm);
+        }
+    }
     updateFrame()
 }
 
@@ -230,10 +308,6 @@ function wormCollision() {
             wormHorde[i].x = 1;
         }
     }
-}
-
-function restartGame() {
-    wormHorde = []
 }
 
 function getDistance(x1, y1, w1, h1, x2, y2, w2, h2) {
