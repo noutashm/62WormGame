@@ -43,7 +43,7 @@
             </ul>
         </nav>
     </header>
-    <main>
+    <main id ="main">
         <div class="row">
             <div class="col">
                 <img src="images/side-left.png" class="left-img img-fluid" alt="side-img-left">
@@ -75,22 +75,57 @@
                 </div>
                 <div class="row">
                     <div class="col-2" id="btn">
-                        <button class="searchBtn" onclick="Search()">Search</button>
+                        <button class="searchBtn" onclick="Availability()">Search</button>
                     </div>
 
                 </div>
                 <div class="row">
-                    <div class="col-1">
+                    <div class="col-1" id="instructions" style = "display: inline-block">
                         <strong>
                             Steps for booking
                         </strong>
                         <li>Enter your name and number of people</li>
                         <li>Set the Check-in and Check-out Date</li>
                         <li>Hover over the Availaible lodges to see the details</li>
-                        <li>Click on the lodge to book </li>
+                        <li>Click on the lodge to view the booking details </li>
                         <li>confirm your booking</li>
 
                     </div>
+                    <div class="col-1" id="roombooking" style="display:none ">
+                        <h3>INFORMATION FOR YOUR STAY</h3>
+                        
+
+                        <p id="sLodge"> Lodge Number :</p>
+                        <p id="sNumber">Number of People :</p>
+                        <p id="sCheckIn">Check-in-date :</p>
+                        <p id="sCheckOut">Check-out-Date :</p>
+                        <p id="sCost">Cost per day : $</p>
+                        <p id="sNumberDays">Number of Days :</p>
+                        <p id="sPrice">Total Amount : $</p>
+                        <button onclick="final()" class="btnstyle" id="btnconfirm">Confirm your booking </button>
+
+                    </div>
+
+                    <div class="col-1" id="roombooking1" style="display: none">
+                        <h2> Your Booking  Details!!!</h2>
+                        <strong>Booking has been confirmed </strong>
+                        <br><br>
+                        <p id="sName1"> Name :</p>
+                        <p id="sLodge1"></p>
+                        <p id="sNumber1">Number of People :</p>
+                        <p id="sCheckIn1">Check-in-date :</p>
+                        <p id="sCheckOut1">Check-out-Date :</p>
+                        <p id="sCost1"></p>
+                        <p id="sNumberDays1">Number of Days :</p>
+                        <p id="sPrice1"></p>
+
+                        <button onclick="anotherBooking()" class="btnstyle" id="btnconfirm">Make Another Booking </button>
+
+                    </div>
+
+
+
+
                     <div class="col-2">
 
 
@@ -98,16 +133,26 @@
                             height="410"></canvas>
 
                         <div id="lodgesBtn">
-                            <a class="btn btn-lg btn-primary" class="lodge" id="lodge1">Lodge 1</a>
-                            <a class="btn btn-lg btn-primary" class="lodge" id="lodge2">Lodge 2</a>
-                            <a class="btn btn-lg btn-primary" class="lodge" id="lodge3">Lodge 3</a>
-                            <a class="btn btn-lg btn-primary" class="lodge" id="lodge4">Lodge 4</a>
-                            <a class="btn btn-lg btn-primary" class="lodge" id="lodge5">Lodge 5</a>
-                            <a class="btn btn-lg btn-primary" class="lodge" id="lodge6">Lodge 6</a>
-                            <a class="btn btn-lg btn-primary" class="lodge" id="lodge7">Lodge 7</a>
-                            <a class="btn btn-lg btn-primary" class="lodge" id="lodge8">Lodge 8</a>
-                            <a class="btn btn-lg btn-primary" class="lodge" id="lodge9">Lodge 9</a>
-                            <a class="btn btn-lg btn-primary" class="lodge" id="lodge10">Lodge 10</a>
+                            <button class="btn btn-lg btn-primary" class="lodge" id="lodge1"
+                                onclick="summary(this.id)" disabled>Lodge 1</button>
+                            <button class="btn btn-lg btn-primary" class="lodge" id="lodge2"
+                                onclick="summary(this.id)">Lodge 2</button>
+                            <button class="btn btn-lg btn-primary" class="lodge" id="lodge3"
+                                onclick="summary(this.id)">Lodge 3</button>
+                            <button class="btn btn-lg btn-primary" class="lodge" id="lodge4"
+                                onclick="summary(this.id)">Lodge 4</button>
+                            <button class="btn btn-lg btn-primary" class="lodge" id="lodge5"
+                                onclick="summary(this.id)" disabled>Lodge 5</button>
+                            <button class="btn btn-lg btn-primary" class="lodge" id="lodge6" 
+                            onclick="summary(this.id)">Lodge6</button>
+                            <button class="btn btn-lg btn-primary" class="lodge" id="lodge7"
+                             onclick="summary(this.id)" disabled>Lodge7 </button>
+                            <button class="btn btn-lg btn-primary" class="lodge" id="lodge8"
+                             onclick="summary(this.id)">Lodge8</button>
+                            <button class="btn btn-lg btn-primary" class="lodge" id="lodge9" 
+                            onclick="summary(this.id)">Lodge9</button>
+                            <button class="btn btn-lg btn-primary" class="lodge" id="lodge10"
+                            onclick="summary(this.id)">Lodge 10</button>
                         </div>
 
                     </div>
@@ -117,33 +162,17 @@
                 <img src="images/side-right.png" class="right-img img-fluid" alt="side-img-right">
             </div>
         </div>
-        
-        <form class="bookingSummary" id="summaryform">
 
 
-            <h2>Summary</h2>
-            <br><br>
-            
-            <div id="roombooking">
-                <p id="sName"></p>
-                <p id="sNumber"></p>
-                <p id="sCheckindate"></p>
-                <p id="sCheckoutdate"></p>
-               
-                <p id="stotaldays"></p>
-                <p id="spriceperday"></p>
-                <p id="stotalprice"></p>
-            </div>
-           
-           
 
-           
-            
-            <button type="submit" onclick="submitfrm()" class="btnstyle" id="btnconfirm">Confirm your booking </button>
-    
 
-        </form>
-    
+
+
+
+
+
+
+
     </main>
 
 
