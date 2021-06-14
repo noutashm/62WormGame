@@ -162,9 +162,13 @@ body {
 }*/
   
 /*=============== Game =================*/
+.canvas-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 canvas {
-  display: block;
-  margin: auto;
   background-image: url("../images/bg.png");
   background-size: cover;
 }
