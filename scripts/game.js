@@ -9,6 +9,7 @@ var happy = new Audio('../sound/happy.wav')
 var trackMovement = 0
 var keys = []
 var fps = 20
+var currentFrame = 0
 
 //Canvas
 const c = document.getElementById("canvas")
@@ -25,21 +26,74 @@ var player = {
     y: c.height / 2,
     vx: 0,
     vy: 0,
-    speed: 6,
+    speed: 8,
     width: sheet.width / 4,
     height: sheet.height / 4
 }
 
-var worm = {
-    x: getRandomInt(12, c.width - 12),
-    y: getRandomInt(170, c.height),
-    vx: getRandomInt(-3, 3),
-    vy: getRandomInt(-3, 3),
-    radius: 10,
-    lifeCycle: 0
-}
+class Worm {
+    constructor(x, y, vx, vy, width, height) {
+        this.x = x
+        this.y = y
+        this.vx = vx
+        this.vy = vy
+        this.width = width
+        this.height = height
+        //this.radius = radius
+        this.lifeCycle = 0
+    }
 
-var currentFrame = 0
+    draw() {
+        var grad = ctx.createRadialGradient(this.x + this.width / 2, this.y + this.height, this.width / 2, Math.PI, 0, 316.23)
+        grad.addColorStop(0, 'rgba(255, 255, 255, 1)')
+        grad.addColorStop(1, 'rgba(255, 231, 132, 1)')
+        ctx.beginPath()
+        ctx.fillStyle = grad
+        ctx.arc(this.x + this.width / 2, this.y + this.height, this.width / 2, Math.PI, 0, false)
+        ctx.fill()
+        ctx.lineWidth = 1
+        ctx.strokeStyle = 'black'
+        ctx.closePath()
+        ctx.stroke()
+    }
+
+    update() {
+        //worm lifecycle
+        switch (this.lifeCycle) {
+            case 0:
+                this.x += this.vx
+                this.y += this.vy
+                this.lifeCycle = 1
+                break
+
+            case 1:
+                this.x += this.vx
+                this.y += this.vy
+                this.width += 1;
+                this.height += 1;
+                if (this.width > 50) {
+                    this.lifeCycle = 2
+                }
+                break
+
+            case 2:
+                this.x += this.vx
+                this.y += this.vy
+                this.width -= 1;
+                this.height -= 1;
+                if (this.width < 1) {
+                    this.lifeCycle = 3
+                }
+                break
+
+            case 3:
+                this.x = getRandomInt(12, c.width - 12)
+                this.y = getRandomInt(170, c.height)
+                this.lifeCycle = 0
+                break
+        }
+    }
+}
 
 window.addEventListener("keydown", keysPressed, false)
 window.addEventListener("keyup", keysReleased, false)
@@ -76,12 +130,11 @@ function controls() {
     }
 
     if (keys[32]) { //space - action
-        sad.play()
+        killWorm()
     }
 }
 
-function animate() {
-    //player
+function animatePlayer() {
     currentFrame = ++currentFrame % 4
     player.vx = currentFrame * player.width
     player.vy = 3
@@ -100,37 +153,8 @@ function animate() {
             break
     }
 
-    //worm - lifecycle
-    switch (worm.lifeCycle) {
-        case 0:
-            worm.x += worm.vx
-            worm.y += worm.vy
-            worm.lifeCycle = 1
-            break
-
-        case 1:
-            worm.x += worm.vx
-            worm.y += worm.vy
-            worm.radius += 1
-            if (worm.radius > 30) {
-                worm.lifeCycle = 2
-            }
-            break
-
-        case 2:
-            worm.x += worm.vx
-            worm.y += worm.vy
-            worm.radius -= 1
-            if (worm.radius < 1) {
-                worm.lifeCycle = 3
-            }
-            break
-
-        case 3:
-            worm.x = getRandomInt(12, c.width - 12)
-            worm.y = getRandomInt(170, c.height)
-            worm.lifeCycle = 0
-            break
+    for (var i = 0; i < wormHorde.length; i++) {
+        wormHorde[i].update();
     }
 }
 
@@ -138,47 +162,87 @@ function updateFrame() {
     controls()
     ctx.clearRect(0, 0, c.width, c.height)
     draw()
-    animate()
+    animatePlayer()
+    wormCollision()
     setTimeout(() => {
         requestAnimationFrame(updateFrame)
     }, 1000 / fps);
 }
 
 function draw() {
+    //player
     ctx.drawImage(playerImg, player.vx, player.vy, player.width, player.height, player.x, player.y, player.width, player.height)
-    spawnWorm(worm.x, worm.y, worm.radius)
-}
 
-function checkCollision() {
+    //worm
+    for (var i = 0; i < wormHorde.length; i++) {
+        wormHorde[i].draw();
+    }
 
-}
-
-function spawnWorm(x, y, r) {
-    var grad = ctx.createRadialGradient(x, y, r, Math.PI, 0, 316.23)
-    grad.addColorStop(0, 'rgba(255, 255, 255, 1)')
-    grad.addColorStop(1, 'rgba(255, 231, 132, 1)')
-    ctx.beginPath()
-    ctx.fillStyle = grad
-    ctx.arc(x, y, r, Math.PI, 0, false)
-    ctx.fill()
-    ctx.lineWidth = 1
-    ctx.strokeStyle = 'black'
-    ctx.closePath()
-    ctx.stroke()
+    //score
+    ctx.font = "30px Arial";
+    //ctx.fillStyle = "white";
+    ctx.fillText("Score: " + score, 10, 50);
 }
 
 window.onload = function startGame() {
+    wormHorde = []
+
+    for (var i = 0; i < 10; i++) {
+        var worm = new Worm(getRandomInt(12, c.width - 12), getRandomInt(170, c.height), getRandomInt(-3, 3), getRandomInt(-3, 3), 20, 100)
+        wormHorde.push(worm)
+    }
+
     updateFrame()
+}
+
+function killWorm() {
+    for (var i = 0; i < wormHorde.length; i++) {
+        var colliding = getDistance(player.x, player.y, player.width, player.height, wormHorde[i].x, wormHorde[i].y, wormHorde[i].width, wormHorde[i].height)
+        if (colliding) {
+            happy.play()
+            score++
+            wormHorde[i].lifeCycle = 3
+        } else if (!colliding) {
+            sad.play()
+        }
+    }
+}
+
+function wormCollision() {
+    for (var i = 0; i < this.wormHorde.length; i++) {
+        //check y-axis collision
+        if (wormHorde[i].y + wormHorde[i].height >= c.height) {
+            wormHorde[i].vy = -wormHorde[i].vy;
+            wormHorde[i].y = c.height - wormHorde[i].height - 1;
+        }
+        else if (wormHorde[i].y <= 80) {
+            wormHorde[i].vy = -wormHorde[i].vy;
+            wormHorde[i].y = 80;
+        }
+
+        //check x-axis collision
+        if (wormHorde[i].x + wormHorde[i].width >= c.width) {
+            wormHorde[i].vx = -wormHorde[i].vx;
+            wormHorde[i].x = c.width - wormHorde[i].width - 1;
+        }
+        else if (wormHorde[i].x <= 0) {
+            wormHorde[i].vx = -wormHorde[i].vx;
+            wormHorde[i].x = 1;
+        }
+    }
 }
 
 function restartGame() {
     wormHorde = []
 }
 
-function hypot(length1, length2) {
-    return Math.sqrt((length1 * length1) + (length2 * length2))
+function getDistance(x1, y1, w1, h1, x2, y2, w2, h2) {
+    if (x2 > w1 + x1 || x1 > w2 + x2 || y2 > h1 + y1 || y1 > h2 + y2) {
+        return false;
+    }
+    return true;
 }
 
 function getRandomInt(min, max) {
-    return Math.floor((Math.random() * max) + min)
+    return Math.floor(Math.random() * (max - min + 1) + min);
 }
