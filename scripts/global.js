@@ -309,7 +309,7 @@ function prebooked(xml) {
 
   for (i = 0; i < x.length; i++) {
     txt = x[i].innerHTML
-   var lodgeList = document.querySelector("#lodgesBtn").children
+    var lodgeList = document.querySelector("#lodgesBtn").children
 
     if (lodgeList.innerHTML == "book") {
 
@@ -368,11 +368,11 @@ function Availability() {
       document.getElementById("lodge8").style.backgroundColor = "red";
       $('#lodge8').attr('disabled', true)
     }
- }
+  }
 }
 
 // Getting the information in the summary
- function summary(id) {
+function summary(id) {
   var date1 = new Date(document.getElementById('checkIn').value);
   var date2 = new Date(document.getElementById('checkOut').value);
   var diff = Math.abs(date2.getTime() - date1.getTime());
@@ -462,7 +462,7 @@ function final() {
   var diff = Math.abs(date2.getTime() - date1.getTime());
   var noofdays = Math.ceil(diff / (1000 * 3600 * 24));
   var cost = ($('#sCost').html());
-  var lodge =($('#sLodge').html());
+  var lodge = ($('#sLodge').html());
   var price = ($('#sPrice').html());
 
   var xhttp = new XMLHttpRequest();

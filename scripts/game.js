@@ -4,10 +4,13 @@ var score = 0
 var wormHorde = []
 var playerImg = new Image()
 playerImg.src = "../images/player.png"
+
 var sad = new Audio('../sound/sad.wav')
 var happy = new Audio('../sound/happy.wav')
 var start = new Audio('../sound/start-game.wav')
 var over = new Audio('../sound/game-over.wav')
+//var audios = [sad, happy, start, over]
+
 var trackMovement = 0
 var keys = []
 var fps = 20
@@ -29,7 +32,7 @@ var player = {
     y: c.height / 2,
     vx: 0,
     vy: 0,
-    speed: 8,
+    speed: 5,
     width: sheet.width / 4,
     height: sheet.height / 4
 }
@@ -92,6 +95,8 @@ class Worm {
             case 3:
                 this.x = getRandomInt(12, c.width - 12)
                 this.y = getRandomInt(170, c.height)
+                this.width = 20
+                this.height = 100
                 this.lifeCycle = 0
                 break
         }
@@ -186,6 +191,7 @@ function draw() {
     ctx.fillStyle = "black";
     ctx.fillText("Score: " + score, 10, 40);
 
+    //timer
     ctx.font = "30px Arial";
     ctx.fillStyle = "black";
     ctx.fillText("Timer: " + counter, 10, 70);
@@ -275,14 +281,12 @@ function restartGame() {
 
 function killWorm() {
     for (var i = 0; i < wormHorde.length; i++) {
-        var colliding = getDistance(player.x, player.y, player.width, player.height, wormHorde[i].x, wormHorde[i].y, wormHorde[i].width, wormHorde[i].height)
-        if (colliding) {
+        if (getDistance(player.x, player.y, player.width, player.height, wormHorde[i].x, wormHorde[i].y, wormHorde[i].width, wormHorde[i].height)) {
             happy.play()
             score++
             wormHorde[i].lifeCycle = 3
-        } else if (!colliding) {
-            sad.play()
         }
+        sad.play()
     }
 }
 

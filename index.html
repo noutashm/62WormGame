@@ -37,13 +37,24 @@
                     <a class="nav-link" href="./docs/Booking_System_Wireframe.pdf" target="_blank">Documentation
                         Booking</a>
                 </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Dropdown link
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                        <li><a class="dropdown-item" href="#">Action</a></li>
+                        <li><a class="dropdown-item" href="#">Another action</a></li>
+                        <li><a class="dropdown-item" href="#">Something else here</a></li>
+                    </ul>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#" target="_blank">Documentation Game</a>
                 </li>
             </ul>
         </nav>
     </header>
-    <main id ="main">
+    <main id="main">
         <div class="row">
             <div class="col">
                 <img src="images/side-left.png" class="left-img img-fluid" alt="side-img-left">
@@ -80,7 +91,7 @@
 
                 </div>
                 <div class="row">
-                    <div class="col-1" id="instructions" style = "display: inline-block">
+                    <div class="col-1" id="instructions" style="display: inline-block">
                         <strong>
                             Steps for booking
                         </strong>
@@ -93,7 +104,7 @@
                     </div>
                     <div class="col-1" id="roombooking" style="display:none ">
                         <h3>INFORMATION FOR YOUR STAY</h3>
-                        
+
 
                         <p id="sLodge"> Lodge Number :</p>
                         <p id="sNumber">Number of People :</p>
@@ -107,7 +118,7 @@
                     </div>
 
                     <div class="col-1" id="roombooking1" style="display: none">
-                        <h2> Your Booking  Details!!!</h2>
+                        <h2> Your Booking Details!!!</h2>
                         <strong>Booking has been confirmed </strong>
                         <br><br>
                         <p id="sName1"> Name :</p>
@@ -119,7 +130,8 @@
                         <p id="sNumberDays1">Number of Days :</p>
                         <p id="sPrice1"></p>
 
-                        <button onclick="anotherBooking()" class="btnstyle" id="btnconfirm">Make Another Booking </button>
+                        <button onclick="anotherBooking()" class="btnstyle" id="btnconfirm">Make Another Booking
+                        </button>
 
                     </div>
 
@@ -133,26 +145,26 @@
                             height="410"></canvas>
 
                         <div id="lodgesBtn">
-                            <button class="btn btn-lg btn-primary" class="lodge" id="lodge1"
-                                onclick="summary(this.id)" disabled>Lodge 1</button>
+                            <button class="btn btn-lg btn-primary" class="lodge" id="lodge1" onclick="summary(this.id)"
+                                disabled>Lodge 1</button>
                             <button class="btn btn-lg btn-primary" class="lodge" id="lodge2"
                                 onclick="summary(this.id)">Lodge 2</button>
                             <button class="btn btn-lg btn-primary" class="lodge" id="lodge3"
                                 onclick="summary(this.id)">Lodge 3</button>
                             <button class="btn btn-lg btn-primary" class="lodge" id="lodge4"
                                 onclick="summary(this.id)">Lodge 4</button>
-                            <button class="btn btn-lg btn-primary" class="lodge" id="lodge5"
-                                onclick="summary(this.id)" disabled>Lodge 5</button>
-                            <button class="btn btn-lg btn-primary" class="lodge" id="lodge6" 
-                            onclick="summary(this.id)">Lodge6</button>
-                            <button class="btn btn-lg btn-primary" class="lodge" id="lodge7"
-                             onclick="summary(this.id)" disabled>Lodge7 </button>
+                            <button class="btn btn-lg btn-primary" class="lodge" id="lodge5" onclick="summary(this.id)"
+                                disabled>Lodge 5</button>
+                            <button class="btn btn-lg btn-primary" class="lodge" id="lodge6"
+                                onclick="summary(this.id)">Lodge6</button>
+                            <button class="btn btn-lg btn-primary" class="lodge" id="lodge7" onclick="summary(this.id)"
+                                disabled>Lodge7 </button>
                             <button class="btn btn-lg btn-primary" class="lodge" id="lodge8"
-                             onclick="summary(this.id)">Lodge8</button>
-                            <button class="btn btn-lg btn-primary" class="lodge" id="lodge9" 
-                            onclick="summary(this.id)">Lodge9</button>
+                                onclick="summary(this.id)">Lodge8</button>
+                            <button class="btn btn-lg btn-primary" class="lodge" id="lodge9"
+                                onclick="summary(this.id)">Lodge9</button>
                             <button class="btn btn-lg btn-primary" class="lodge" id="lodge10"
-                            onclick="summary(this.id)">Lodge 10</button>
+                                onclick="summary(this.id)">Lodge 10</button>
                         </div>
 
                     </div>
