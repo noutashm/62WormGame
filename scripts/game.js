@@ -32,7 +32,7 @@ var player = {
     y: c.height / 2,
     vx: 0,
     vy: 0,
-    speed: 5,
+    speed: 8,
     width: sheet.width / 4,
     height: sheet.height / 4
 }
@@ -117,22 +117,22 @@ function keysReleased(e) {
 }
 
 function controls() {
-    if (keys[37] || keys[65] && player.x >= 0) { // left
+    if (keys[37] && player.x >= 0 || keys[65] && player.x >= 0) { // left
         player.x -= player.speed
         trackMovement = 1
     }
 
-    if (keys[38] || keys[87] && player.y >= 110) { // up
+    if (keys[38] && player.y >= 110 || keys[87] && player.y >= 110) { // up
         player.y -= player.speed
         trackMovement = 3
     }
 
-    if (keys[39] || keys[68] && player.x <= (c.width - player.width + 5)) { // right
+    if (keys[39] && player.x <= (c.width - player.width + 5) || keys[68] && player.x <= (c.width - player.width + 5)) { // right
         player.x += player.speed
         trackMovement = 2
     }
 
-    if (keys[40] || keys[83] && player.y <= (c.height - player.height)) { // down
+    if (keys[40] && player.y <= (c.height - player.height) || keys[83] && player.y <= (c.height - player.height)) { // down
         player.y += player.speed
         trackMovement = 0
     }
@@ -259,9 +259,12 @@ function restartGame() {
         wormHorde.push(worm)
     }
 
+    document.getElementById('score').innerHTML = 0
+
     start.play()
 
     setInterval(() => {
+        document.getElementById('score').innerHTML = score
         gameOverModal.show()
         over.play()
     }, restartConvertedTime);
