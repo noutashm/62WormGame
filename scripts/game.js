@@ -9,7 +9,6 @@ var sad = new Audio('../sound/sad.wav')
 var happy = new Audio('../sound/happy.wav')
 var start = new Audio('../sound/start-game.wav')
 var over = new Audio('../sound/game-over.wav')
-//var audios = [sad, happy, start, over]
 
 var trackMovement = 0
 var keys = []
@@ -45,7 +44,6 @@ class Worm {
         this.vy = vy
         this.width = width
         this.height = height
-        //this.radius = radius
         this.lifeCycle = 0
     }
 
@@ -206,13 +204,13 @@ window.onload = function startMenu() {
 
 function startGame() {
     var timer = document.getElementById("timer").value
-    var volume = document.getElementById("volume")
+    var volume = document.getElementById("volume").value
     var convertedTime = timer * 1000
 
-    happy.volume = volume.value / 100;
-    sad.volume = volume.value / 100;
-    start.volume = volume.value / 100;
-    over.volume = volume.value / 100;
+    happy.volume = volume;
+    sad.volume = volume;
+    start.volume = volume;
+    over.volume = volume;
 
     //make 10 worms
     wormHorde = []
@@ -248,10 +246,10 @@ function restartGame() {
     var restartVolume = document.getElementById("restartVolume").value
     var restartConvertedTime = restartTimer * 1000;
 
-    happy.volume = restartVolume.value / 100;
-    sad.volume = restartVolume.value / 100;
-    start.volume = restartVolume.value / 100;
-    over.volume = restartVolume.value / 100;
+    happy.volume = restartVolume;
+    sad.volume = restartVolume;
+    start.volume = restartVolume;
+    over.volume = restartVolume;
 
     wormHorde = []
     for (var i = 0; i < 10; i++) {
@@ -259,6 +257,8 @@ function restartGame() {
         wormHorde.push(worm)
     }
 
+    score = 0
+    counter = 0
     document.getElementById('score').innerHTML = 0
 
     start.play()

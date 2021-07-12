@@ -1,3 +1,8 @@
+:root {
+  --primary-color: #270f0d;
+  --secondary-color: #e8be98;
+}
+
 /*=============== Global =================*/
 * {
   padding: 0;
@@ -28,16 +33,31 @@ body {
 
 .nav-link,
 .nav-link:visited,
-.nav-link:active {
-  color: #e8be98;
+.nav-link:active,
+.nav-link:link {
+  color: var(--secondary-color);
 }
 
 .nav-item:hover {
-  background-color: #e8be98;
+  background-color: var(--secondary-color);
 }
 
 .nav-item:hover .nav-link {
-  color: #270f0d;
+  color: var(--primary-color);
+}
+
+.dropdown-menu {
+  width: 100%;
+  background-color: var(--secondary-color);
+}
+
+.dropdown-item {
+  width: auto;
+}
+
+.dropdown-item:hover {
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
 }
 
 /*=============== Content =================*/
@@ -45,13 +65,10 @@ body {
   width: 100%;
 }
 
-/* .left-img, .right-img {
-
-} */
-
 #main{
   background-color:aliceblue;
 }
+
 .right-img {
   float: right;
 }
@@ -63,17 +80,17 @@ body {
 #btn{
   padding-top: 20px;
 }
+
 .searchBtn {
   background-color: rgb(15, 83, 230);
   color: white;
   text-align: center;
- padding: 10px 20px;
+  padding: 10px 20px;
   font-size: 15px;
   cursor: pointer;
   display: inline-block;
   
 }
-
 
 #myCanvas{
   position:relative;
@@ -111,65 +128,64 @@ body {
   height:60px}
 
 
-  #lodge4{ position: absolute;
-    top: 75px;
-    left: 165px;
-    width: 40px;
-    height:70px
-  }
+#lodge4{ position: absolute;
+  top: 75px;
+  left: 165px;
+  width: 40px;
+  height:70px
+}
 
-  #lodge5{ position: absolute;
-    top: 205px;
-    left: 160px;
-    width: 50px;
-    height:45px
-  }
+#lodge5{ position: absolute;
+  top: 205px;
+  left: 160px;
+  width: 50px;
+  height:45px
+}
 
-  #lodge6{ position: absolute;
-    top: 330px;
-    left: 170px;
-    width: 50px;
-    height:55px
-  }
+#lodge6{ position: absolute;
+  top: 330px;
+  left: 170px;
+  width: 50px;
+  height:55px
+}
 
-  #lodge7{ position: absolute;
-    top: 0px;
-    left: 300px;
-    width: 50px;
-    height:25px
-  }
+#lodge7{ position: absolute;
+  top: 0px;
+  left: 300px;
+  width: 50px;
+  height:25px
+}
 
-  #lodge8{ position: absolute;
-    top: 80px;
-    left: 280px;
-    width: 60px;
-    height:65px
-  }
+#lodge8{ position: absolute;
+  top: 80px;
+  left: 280px;
+  width: 60px;
+  height:65px
+}
 
-  #lodge9{ position: absolute;
-    top: 210px;
-    left: 280px;
-    width: 60px;
-    height:70px
-  }
+#lodge9{ position: absolute;
+  top: 210px;
+  left: 280px;
+  width: 60px;
+  height:70px
+}
 
-  #lodge10{ position: absolute;
-    top: 350px;
-    left: 280px;
-    width: 60px;
-    height:40px
-  }
+#lodge10{ position: absolute;
+  top: 350px;
+  left: 280px;
+  width: 60px;
+  height:40px
+}
   
-  #image1{
-    width:200px;
-    height:150px
-  }
+#image1{
+  width:200px;
+  height:150px
+}
 
 #roombooking{
   margin-left: 10px;
   
 }
-
 
 #roombooking1{
   margin-left: 15px;
@@ -177,12 +193,14 @@ body {
   
 /*=============== Game =================*/
 canvas {
-  display: block;
-  margin: auto;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translateY(-50%) translateX(-50%);
   background-image: url("../images/bg.png");
   background-size: cover;
 }
 
 .form-select {
-  width: auto;
+  width: 90%;
 }
