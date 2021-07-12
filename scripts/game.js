@@ -170,7 +170,7 @@ function updateFrame() {
     draw()
     animatePlayer()
     wormCollision()
-    setTimeout(() => {
+    var frame = setTimeout(() => {
         requestAnimationFrame(updateFrame)
     }, 1000 / fps);
 }
@@ -222,7 +222,7 @@ function startGame() {
     start.play()
 
     //timer
-    setInterval(() => {
+    var stimer = setInterval(() => {
         document.getElementById('score').innerHTML = score;
         gameOverModal.show()
         over.play()
@@ -235,6 +235,8 @@ function startGame() {
         counter--;
         if (counter == 0) {
             clearInterval(tm);
+            clearInterval(stimer);
+            clearTimeout(frame);
         }
     }
 
@@ -263,7 +265,7 @@ function restartGame() {
 
     start.play()
 
-    setInterval(() => {
+    var gtimer = setInterval(() => {
         document.getElementById('score').innerHTML = score
         gameOverModal.show()
         over.play()
@@ -271,12 +273,14 @@ function restartGame() {
 
     //timer
     counter = parseInt(restartTimer)
-    var tm = setInterval(countDown, 1000);
+    var rtm = setInterval(restartCountDown, 1000);
 
-    function countDown() {
+    function restartCountDown() {
         counter--;
         if (counter == 0) {
-            clearInterval(tm);
+            clearInterval(rtm);
+            clearInterval(gtimer);
+            clearTimeout(frame);
         }
     }
     updateFrame()
@@ -288,6 +292,7 @@ function killWorm() {
             happy.play()
             score++
             wormHorde[i].lifeCycle = 3
+            return
         }
         sad.play()
     }
