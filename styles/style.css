@@ -65,8 +65,8 @@ body {
   width: 100%;
 }
 
-#main{
-  background-color:aliceblue;
+#main {
+  background-color: aliceblue;
 }
 
 .right-img {
@@ -77,7 +77,7 @@ body {
   text-align: center;
 }
 
-#btn{
+#btn {
   padding-top: 20px;
 }
 
@@ -89,108 +89,118 @@ body {
   font-size: 15px;
   cursor: pointer;
   display: inline-block;
-  
+
 }
 
-#myCanvas{
-  position:relative;
+#myCanvas {
+  position: relative;
 }
 
 .col-2 {
- 
   margin-left: 100px;
   position: relative;
 }
 
-.col-1{
+.col-1 {
   padding-top: 100px;
   width: max-content;
 }
 
-#lodge1{ position: absolute;
- ;
+#lodge1 {
+  position: absolute;
   top: 75px;
-  left: 55px;
+  left: -55px;
   width: 40px;
-  height:70px
+  height: 70px
 }
 
-#lodge2{position: absolute;
+#lodge2 {
+  position: absolute;
   top: 175px;
-  left: 55px;
+  left: -55px;
   width: 40px;
-  height:60px}
+  height: 60px
+}
 
-#lodge3{position: absolute;
+#lodge3 {
+  position: absolute;
   top: 320px;
-  left: 20px;
+  left: -80px;
   width: 60px;
-  height:60px}
+  height: 60px
+}
 
 
-#lodge4{ position: absolute;
+#lodge4 {
+  position: absolute;
   top: 75px;
-  left: 165px;
+  left: 58px;
   width: 40px;
-  height:70px
+  height: 70px
 }
 
-#lodge5{ position: absolute;
+#lodge5 {
+  position: absolute;
   top: 205px;
-  left: 160px;
+  left: 60px;
   width: 50px;
-  height:45px
+  height: 45px
 }
 
-#lodge6{ position: absolute;
+#lodge6 {
+  position: absolute;
   top: 330px;
-  left: 170px;
+  left: 60px;
   width: 50px;
-  height:55px
+  height: 55px
 }
 
-#lodge7{ position: absolute;
-  top: 0px;
-  left: 300px;
+#lodge7 {
+  position: absolute;
+  top: 5px;
+  left: 190px;
   width: 50px;
-  height:25px
+  height: 25px
 }
 
-#lodge8{ position: absolute;
+#lodge8 {
+  position: absolute;
   top: 80px;
-  left: 280px;
+  left: 180px;
   width: 60px;
-  height:65px
+  height: 65px
 }
 
-#lodge9{ position: absolute;
+#lodge9 {
+  position: absolute;
   top: 210px;
-  left: 280px;
+  left: 180px;
   width: 60px;
-  height:70px
+  height: 70px
 }
 
-#lodge10{ position: absolute;
+#lodge10 {
+  position: absolute;
   top: 350px;
-  left: 280px;
+  left: 180px;
   width: 60px;
-  height:40px
-}
-  
-#image1{
-  width:200px;
-  height:150px
+  height: 40px
 }
 
-#roombooking{
+#image1 {
+  width: 200px;
+  height: 150px
+}
+
+#roombooking {
   margin-left: 10px;
-  
+
 }
 
-#roombooking1{
+#roombooking1 {
   margin-left: 15px;
 }
-  
+
 /*=============== Game =================*/
 canvas {
   position: absolute;
